@@ -1,0 +1,44 @@
+version: "3.9"
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    networks:
+      - vizforge-net
+
+  backend:
+    build:
+      context: ./services/bridge
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+    volumes:
+      - ./services/bridge:/app
+    networks:
+      - vizforge-net
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - vizforge-net
+
+volumes:
+  redis-data:
+
+networks:
+  vizforge-net:
+    driver: bridge

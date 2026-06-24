@@ -1,0 +1,33 @@
+{
+  "name": "vizforge",
+  "version": "1.0.0",
+  "private": true,
+  "description": "VizForge — VTK.js 可视化管线引擎，高性能 Web 科学可视化平台",
+  "author": "王浩博 <1303980309@qq.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YaeSakura923/vtk-visualization-pipeline"
+  },
+  "workspaces": [
+    "packages/*",
+    "apps/*",
+    "services/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=apps/studio",
+    "build": "npm run build --workspace=packages/core && npm run build --workspace=packages/engine && npm run build --workspace=apps/studio",
+    "build:all": "npm run build",
+    "test": "npm run test --workspace=apps/studio",
+    "test:all": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present",
+    "clean": "npm run clean --workspaces --if-present",
+    "docs:dev": "npm run dev --workspace=apps/docs",
+    "docs:build": "npm run build --workspace=apps/docs",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
