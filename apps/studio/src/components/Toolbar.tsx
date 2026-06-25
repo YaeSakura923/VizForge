@@ -54,12 +54,15 @@ export default function Toolbar({
   return (
     <header className="toolbar" ref={toolbarRef}>
       <div className="toolbar-brand">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M12 2L2 7l10 5 10-5-10-5z" />
-          <path d="M2 17l10 5 10-5" />
-          <path d="M2 12l10 5 10-5" />
+        <svg viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+          {/* Forge hammer */}
+          <path d="M14 4L4 10v8l10 6 10-6v-8L14 4z" />
+          <path d="M14 4v20" opacity="0.4" />
+          <path d="M4 14l10-4 10 4" opacity="0.6" />
+          <circle cx="14" cy="14" r="3" fill="currentColor" stroke="none" opacity="0.3" />
+          <path d="M10 8l8 12M18 8l-8 12" strokeWidth="1.2" opacity="0.5" />
         </svg>
-        <span>VizForge Studio</span>
+        <span>VizForge</span>
       </div>
 
       <div className="toolbar-actions">

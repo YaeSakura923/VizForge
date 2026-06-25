@@ -251,6 +251,13 @@ export default function PipelineEditor({ onApplyPipeline, onClose }: PipelineEdi
 
       {/* SVG connections layer */}
       <svg className="pipeline-svg" ref={svgRef}>
+        <defs>
+          <linearGradient id="connection-gradient" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="#4fc3f7" stopOpacity="0.3" />
+            <stop offset="50%" stopColor="#7c4dff" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#4fc3f7" stopOpacity="0.3" />
+          </linearGradient>
+        </defs>
         {state.connections.map((conn) => {
           const sourceNode = state.nodes.find((n) => n.id === conn.sourceNodeId);
           const targetNode = state.nodes.find((n) => n.id === conn.targetNodeId);
@@ -372,9 +379,27 @@ export default function PipelineEditor({ onApplyPipeline, onClose }: PipelineEdi
 
       {state.nodes.length === 0 && (
         <div className="pipeline-empty">
-          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" strokeWidth="1.5" width="64" height="64">
-            <rect x="8" y="6" width="32" height="36" rx="4" />
-            <path d="M16 20h16M16 28h10" strokeLinecap="round" />
+          <svg viewBox="0 0 80 80" fill="none" stroke="currentColor" strokeWidth="1.2">
+            {/* Background grid dots */}
+            <pattern id="grid" width="8" height="8" patternUnits="userSpaceOnUse">
+              <circle cx="4" cy="4" r="0.5" opacity="0.3" />
+            </pattern>
+            <rect width="80" height="80" fill="url(#grid)" opacity="0.3" />
+
+            {/* Pipeline nodes */}
+            <rect x="8" y="18" width="20" height="14" rx="4" strokeWidth="1.5" opacity="0.5" />
+            <rect x="52" y="18" width="20" height="14" rx="4" strokeWidth="1.5" opacity="0.5" />
+            <rect x="30" y="48" width="20" height="14" rx="4" strokeWidth="1.5" opacity="0.7" />
+
+            {/* Connections */}
+            <path d="M28 25h24" strokeDasharray="4 3" opacity="0.4" />
+            <path d="M30 48c0-5 10-8 10-16" strokeDasharray="4 3" opacity="0.4" />
+            <path d="M50 48c0-5-10-8-10-16" strokeDasharray="4 3" opacity="0.4" />
+
+            {/* Port dots */}
+            <circle cx="18" cy="25" r="2" fill="currentColor" opacity="0.4" />
+            <circle cx="62" cy="25" r="2" fill="currentColor" opacity="0.4" />
+            <circle cx="40" cy="55" r="2.5" fill="currentColor" opacity="0.6" />
           </svg>
           <h3>Pipeline Node Editor</h3>
           <p>Right-click on the canvas to add nodes, then connect them to build your visualization pipeline.</p>
